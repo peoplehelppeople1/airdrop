@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>随机空投</title>
+</head>
+<body>
+    <script type='text/javascript' src='web3/web3.min.js'></script>
+    <script >
+      function connet(){
+        // var mate = window.ethereum;
+        if(typeof window.ethereum === 'undefined'){
+            alert('未安装钱包')
+        }
+        try{
+            window.ethereum.enable()
+        }catch(err){
+            alert('未通过')
+        }
+        if(!window.ethereum.isConnected()){
+            alert('请先连接钱包')
+        }else{
+            window.web3 = new Web3(window.ethereum);
+            // console.log(ethereum.selectedAddress)
+            document.getElementById('_connet').value = ethereum.selectedAddress.slice(0,6)+ '....'  +ethereum.selectedAddress.slice(-6)
+            document.getElementById('_connet').onclick = ""
+    }}  
+    contract = "0x23EC826Ca24Ec52C635e160B1836d387AAAEFfb6"
+	token = ""
+	desi = 0
+    function getContract(){
+        var abi = [{"inputs":[],"name":"num","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"numOfAdr","type":"uint256"},{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"n","type":"uint256"}],"name":"rand_airDrop","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"rundom_addr","outputs":[{"internalType":"address","name":"addr","type":"address"}],"stateMutability":"view","type":"function"}]
+        var _contract =new web3.eth.Contract(abi,contract);
+        return _contract
+    }
+	
+	function getContract_token(token){
+		var abi = [{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"constant":true,"inputs":[],"name":"_decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"_name","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"_symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burn","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getOwner","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"mint","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"address","name":"recipient","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]
+		var _contract =new web3.eth.Contract(abi,token);
+        return _contract
+	}
+   
+    function redeci(num,decis){
+		if(num.length <= decis){
+		re = "0." + jia0(decis , num.length) + num
+		return re
+		}
+		re = num.slice(num.length - decis,num.length)
+		re = num.slice(0,length - decis) + "." + num.slice(num.length - decis,num.length)
+		return re
+	}
+    function jia0(decimal,len){re = "";for(i=0;i<decimal - len ;i++){re+="0"}return re }
+
+    function rmdeci(num,decis){
+        s = num.indexOf('.')
+        if( s == -1){
+            re = num + jia0(decis,0)
+            console.log(re)
+            return re
+        }
+        re1 = num.slice(s + 1  ,num.length)
+        re2 = num.slice(0 ,s)
+
+        if(re1.length > decis){
+            re1 = re1.slice(0 ,decis)
+        }       
+        
+        re = re2 + re1 + jia0(decis,re1.length);
+        console.log(re)
+        return re
+    }
+   
+    function getbalance(){
+		web3.eth.getBalance(ethereum.selectedAddress, (err,result) => {
+		if (err== null) {
+		//	console.log(result);
+		  bnb = web3.utils.fromWei(result,'ether')
+		  document.getElementById('bnb').text = '  余额：' +bnb
+		}else  {
+		  console.log('~error:'+err);
+		}
+	  })}
+
+	
+	function changetoken(){
+		token = document.getElementById('tokenadr').value
+		var _contract = getContract_token(token)
+		_contract.methods.decimals().call().then(res => {
+			console.log(res)
+            desi = res
+            document.getElementById('deci').text = desi
+			_contract.methods.balanceOf(ethereum.selectedAddress).call().then(res => {
+                console.log(redeci(res,desi))
+                document.getElementById('con').text = redeci(res,desi)
+            })
+		})
+		
+	}
+	
+	function approve(){
+        var _contract = getContract_token(token)
+        _contract.methods.approve(contract,"1000000000000000000000000000000000000000000").send({from:ethereum.selectedAddress},(err,res)=>{
+        if(err){
+            console.log(err)
+        }else{
+            console.log(res)
+        }
+    }) 
+    }
+    function airDrop(){
+        var _contract =  getContract()
+        var _numOfAdr = document.getElementById('numOfAdr').value
+        var _numOftoken = document.getElementById('numOftoken').value
+        _numOftoken = rmdeci(_numOftoken,desi)
+        console.log(_numOfAdr,token,_numOftoken)
+        _contract.methods.rand_airDrop(_numOfAdr,token,_numOftoken).send({from:ethereum.selectedAddress},(err,res)=>{        if(err){            console.log(err)        }else{            console.log(res)        }    }) 
+    }
+
+    </script>
+    
+    <input value="链接" type="button" onclick="connet()" id="_connet"> </br>
+    <input value="bnb余额" type="button" onclick="getbalance()" ><a id="bnb"></a></br>
+	<a>代币地址<a><input type="text" value="0x49849B283348af4423D6750EfF475a759A7338EC" id="tokenadr"><input type="button" value="确定" onclick="changetoken()"></br>
+	<a>代笔余额: <a><a id="con"><a></br>
+	<a>代币精度: <a><a id="deci"><a></br>
+    </br>
+    <a>随机地址数量<a><input type="text" value="" id="numOfAdr"></br> 
+    <a>每个地址发放数量<a><input type="text" value="" id="numOftoken"></br> 
+    <input type="button" value="授权" onclick="approve()"> </br> </br> 
+    <input type="button" value="空投" onclick="airDrop()"> </br> </br> 
+    </br>
+    </br>
+    随机空投合约地址      0x23EC826Ca24Ec52C635e160B1836d387AAAEFfb6
+ 
+</body>
+</html>
